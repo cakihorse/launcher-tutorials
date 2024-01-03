@@ -1,0 +1,52 @@
+import { Callout } from "nextra-theme-docs";
+
+# Main.java
+
+The class extends JFrame, so we can directly use the Main() function to set the window.
+We set :
+- The title of the window
+- its size
+- The result as a click on the quit button
+- The content of the window
+- its icon
+- And if it's resizable.
+
+<Callout type="error" emoji="⚠️">
+  The Graphical User Interface (GUI) is not yours. Please make your GUI ! 
+</Callout>
+
+## isConnected ?
+```java
+MicrosoftAuthenticator microsoftAuthenticator = new MicrosoftAuthenticator();
+        final String refresh_token = getSaver().get("refresh_token");
+        MicrosoftAuthResult result;
+
+        if (refresh_token != null) {
+            try {
+                result = microsoftAuthenticator.loginWithRefreshToken(refresh_token);
+            } catch (MicrosoftAuthenticationException ex) {
+                throw new RuntimeException(ex);
+            }
+            Launcher.authInfos = new AuthInfos(result.getProfile().getName(), result.getAccessToken(), result.getProfile().getId());
+            System.out.printf("Logged in with '%s'%n", result.getProfile().getName());
+            setContentPane(new PHome());
+            repaint();
+            revalidate();
+        }
+        ```
+        
+This bit of code verify if a microsoft account (refresh_token, **not the credentials**) is saved in the saver file. If it's true, the launcher will launch correctly, if it's false a webView will appear.
+
+## A bit of fun
+I've add a little function to allow users to move the window wind their mouse.
+You're don't have to keep this function.
+#### Theme ?
+I also applyed a theme (intellij theme), this is also not a necessary.
+
+## Launching the window
+```java
+Main main = new Main();
+```
+It's only there to launch the window.
+
+
